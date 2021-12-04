@@ -9,7 +9,7 @@ const scene=new THREE.Scene()
 
 const container=document.getElementById('divThree')
 
-let camera=new THREE.PerspectiveCamera(50,window.innerWidth/window.innerHeight,0.1,1000)
+let camera=new THREE.PerspectiveCamera(50,window.innerWidth/window.innerHeight,0.01,1000)
 
 const renderer=new THREE.WebGL1Renderer({
   canvas:container,
@@ -20,7 +20,7 @@ const renderer=new THREE.WebGL1Renderer({
 renderer.setPixelRatio(container.devicePixelRatio)
 renderer.setSize(window.innerWidth,window.innerHeight)
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 1.25;
+renderer.toneMappingExposure = 1;
 /*renderer.toneMapping = THREE.ReinhardToneMapping;*/
 renderer.outputEncoding = THREE.sRGBEncoding;
 /*renderer.autoClear = false;*/
@@ -28,32 +28,32 @@ renderer.outputEncoding = THREE.sRGBEncoding;
 
 camera.position.set(0,0,500)
 
-const lumiere=new THREE.PointLight(0xffffff,0.5)
-lumiere.position.set(50,0,150)
-scene.add(lumiere)
+/*const lumiere=new THREE.PointLight(0xffffff,0.01)
+lumiere.position.set(550,0,550)
+scene.add(lumiere)*/
 
 
 /*construction sphere*/
 
 let envmaploader= new THREE.PMREMGenerator(renderer)
 
-new RGBELoader().setPath('./').load('photo_studio_loft_hall_4k.hdr',(hdrmap)=>{
+new RGBELoader().setPath('./').load('abstract.hdr',(hdrmap)=>{
 
   let envmap=envmaploader.fromCubemap(hdrmap)
   let textures=new THREE.CanvasTexture(new FlakesTexture())
   textures.wrapS= THREE.RepeatWrapping
   textures.wrapT= THREE.RepeatWrapping
-  textures.repeat.x=10
-  textures.repeat.y=6
+  textures.repeat.x=500
+  textures.repeat.y=500
   
   const sphereMaterials={
     clearcoat: 1,
-    clearcoatRoughness:0.05,
+    clearcoatRoughness:1,
     metalness:1,
     roughness:0.5,
-    color:0x8418ca,
+    color:0x1e272e,
     normalMap:textures,
-    normalScale:new THREE.Vector2(0.05,0.05),
+    normalScale:new THREE.Vector2(0.15,0.15),
     envMap:envmap.texture,
     transparent: true,
   }
@@ -68,7 +68,7 @@ new RGBELoader().setPath('./').load('photo_studio_loft_hall_4k.hdr',(hdrmap)=>{
 /*construction sphere*/
 const controls=new OrbitControls(camera,renderer.domElement)
 
-controls.autoRotate=true
+controls.autoRotate=false
 controls.autoRotateSpeed=1
 controls.enableDamping=true
 /*controls.enableZoom=false*/
