@@ -30,7 +30,7 @@ section{
   align-items: center;
   justify-content: center;
   margin-top: -10vh;
-  
+  transition: ease-in-out 0.5s;
 }
 .titre :nth-child(1){
   letter-spacing: 40px;

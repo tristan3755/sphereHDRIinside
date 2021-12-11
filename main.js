@@ -3,7 +3,12 @@ import './style.css'
 import * as THREE from 'three'
 import {RGBELoader} from 'three/examples/jsm/loaders/RGBELoader'
 import {FlakesTexture} from 'three/examples/jsm/textures/FlakesTexture'
-
+import gsap from 'gsap'
+/*landingpage*/
+let portfolio=document.querySelector('header p:nth-child(1)')
+let titre=document.querySelector('.titre')
+let sect1=document.getElementById('sect1')
+/*landingpage*/
 const scene=new THREE.Scene()
 
 const container=document.getElementById('divThree')
@@ -76,12 +81,31 @@ let cameraDistance = 70;
 camera.position.z = cameraDistance;
 orbit.add( camera );
 
+function fadeAwayTitre(){
+  sect1.removeChild(titre)
+}
+
+portfolio.addEventListener('click',()=>{
+  console.log('yo')
+  gsap.to(camera.position,{duration:5,y:-500})
+  titre.style.transform='translateY(-100vh)'
+  setTimeout(fadeAwayTitre,1000)
+
 })
 
+})
+
+
+
+
 function animate(){
+
+  
 
   renderer.render(scene,camera)
   requestAnimationFrame(animate)
   
 }
   animate()
+
+
