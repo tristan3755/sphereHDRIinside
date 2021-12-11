@@ -19,11 +19,54 @@ section{
   align-items: center;
   justify-content:center;
 }
-section h1{
-  color: white;
-  font-size: 8vmin;
+.titre{
   position: absolute;
   z-index: 1;
-  font-family: 'Playfair Display', serif;
-  letter-spacing: 25px;
+  font-family: 'Lora', serif;
+  width: 100%;
+  height: 40vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: -10vh;
+  
+}
+.titre :nth-child(1){
+  letter-spacing: 40px;
+  font-size: 8vmin;
+text-transform: uppercase;
+margin-bottom: 0;
+color: white;
+font-weight: lighter;
+}
+.titre :nth-child(2){
+letter-spacing: 30px;
+font-size: 4vmin;
+color: white;
+font-weight: lighter;
+}
+.cadre{
+  position: absolute;
+  width: 95%;
+  height: 95vh;
+  border: solid 5px white;
+  opacity: 0.8;
+}
+header{
+  position: absolute;
+  width: 90%;
+  height: 20vh;
+  bottom: 2vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+}
+header p{
+  color: white;
+  text-transform: uppercase;
+  font-family: 'Lora', serif;
+  letter-spacing: 2.5px;
+  font-size: 2vmin;
 }
