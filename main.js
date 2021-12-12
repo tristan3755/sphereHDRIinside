@@ -4,10 +4,15 @@ import * as THREE from 'three'
 import {RGBELoader} from 'three/examples/jsm/loaders/RGBELoader'
 import {FlakesTexture} from 'three/examples/jsm/textures/FlakesTexture'
 import gsap from 'gsap'
+import hoverEffect from 'hover-effect'
 /*landingpage*/
 let portfolio=document.querySelector('header p:nth-child(1)')
 let titre=document.querySelector('.titre')
 let sect1=document.getElementById('sect1')
+let grid=document.querySelector('.portfolioGrid')
+let header=document.querySelector('header')
+let retourPortfolio=document.querySelector('.retour')
+let cadre=document.querySelector('.cadre')
 /*landingpage*/
 const scene=new THREE.Scene()
 
@@ -84,23 +89,40 @@ orbit.add( camera );
 function fadeAwayTitre(){
   sect1.removeChild(titre)
 }
-
+function returnTitre(){
+  titre.style.transform='translateY(0vh)'
+}
+function transitionGrid(){
+  grid.style.transform='translateY(0vh)';
+}
+function fadeAwayGrid(){
+  grid.style.display='none'
+}
 portfolio.addEventListener('click',()=>{
-  console.log('yo')
   gsap.to(camera.position,{duration:5,y:-500})
   titre.style.transform='translateY(-100vh)'
   setTimeout(fadeAwayTitre,1000)
+  grid.style.display='grid'
+  sect1.removeChild(header)
+  sect1.removeChild(cadre)
+  setTimeout(hover,500)
+  setTimeout(transitionGrid,500)
+})
 
+retourPortfolio.addEventListener("click",()=>{
+  gsap.to(camera.position,{duration:5,y:0})
+  sect1.appendChild(titre)
+  setTimeout(returnTitre,1000)
+  grid.style.transform='translateY(100vh)';
+  setTimeout(fadeAwayGrid,1000)
+  sect1.appendChild(header)
+  sect1.appendChild(cadre)
 })
 
 })
-
-
 
 
 function animate(){
-
-  
 
   renderer.render(scene,camera)
   requestAnimationFrame(animate)
@@ -109,3 +131,60 @@ function animate(){
   animate()
 
 
+/*hover effect*/
+function hover(){
+  if(!document.querySelector('.image canvas')){
+new hoverEffect(
+  {
+    parent:document.querySelector('.image'),
+    intensity:0.8,
+    image1:'./metis.jpg',
+    image2:'./metis2.jpg',
+    displacementImage:'./heightMap.png',
+    imagesRatio:0.55,
+  },
+)
+
+}
+if(!document.querySelector('.image1 canvas')){
+new hoverEffect(
+  
+  {
+    parent:document.querySelector('.image1'),
+    intensity:0.8,
+    image1:'./meteo.jpg',
+    image2:'./meteo2.jpg',
+    displacementImage:'./fluid.jpg',
+    imagesRatio:0.5,
+  }
+)
+
+}
+
+if(!document.querySelector('.image2 canvas')){
+new hoverEffect(
+  {
+    parent:document.querySelector('.image2'),
+    intensity:0.8,
+    image1:'./communart.jpg',
+    image2:'./communart2.jpg',
+    displacementImage:'./strip.png',
+    imagesRatio:0.5,
+  }
+)
+
+}
+
+if(!document.querySelector('.image3 canvas')){
+new hoverEffect(
+  {
+    parent:document.querySelector('.image3'),
+    intensity:0.8,
+    image1:'./community.jpg',
+    image2:'./community2.jpg',
+    displacementImage:'./ramen.jpg',
+    imagesRatio:0.5,
+  }
+)
+}
+}
